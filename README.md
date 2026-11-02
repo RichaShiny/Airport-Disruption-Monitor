@@ -16,7 +16,7 @@ Open http://127.0.0.1:3001. On Windows PowerShell set `$env:PORT="3001"` before 
 ## Features and real data
 
 - FAA ground stops, ground delays, arrival/departure delays and closure/restriction advisories.
-- Aviation Weather Center METAR reports for 15 major US airports.
+- Aviation Weather Center METAR reports for 50 major US airports.
 - All national FAA advisories remain visible even outside the weather watchlist.
 - Search, advisory/weather filters and a device-local airport watchlist.
 - Independent feed status, source timestamps and partial-outage handling.
@@ -38,3 +38,9 @@ npm run check
 ```
 
 Tests cover feed normalization and unavailable or malformed data. Run-time provider availability depends on upstream service limits. The app contains no sample fallback data.
+
+## Hugging Face open data enrichment
+
+Includes 1,147 scheduled-service large airports from [yuiseki/ourairports-2026-08](https://huggingface.co/datasets/yuiseki/ourairports-2026-08), a public-domain OurAirports snapshot dated August 31, 2026. Revision: `6c1d115e83a7865005260e4b1ed70eda86d95107`. The original dataset license is retained at `data/LICENSE.txt`; source, revision, selection rule and raw-file SHA-256 are embedded in `data/airports.json`. Airport codes, names, coordinates, city, country and elevation are reference data, not live operational data. This subset is not a complete directory of all airports.
+
+The monitor expands to 50 US airports selected from the Hugging Face reference, adds temperature, dew point, pressure and cloud layers, and shows expandable NOAA TAF forecasts with issue time and validity. TAF forecasts are separate from observed METAR weather; an unavailable TAF feed is reported independently.
